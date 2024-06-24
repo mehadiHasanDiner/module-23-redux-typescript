@@ -7,7 +7,7 @@ import TodoProvider from './context/TodoProvider';
 import TodoForm from './components/todo/TodoForm';
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   return (
     <TodoProvider>
