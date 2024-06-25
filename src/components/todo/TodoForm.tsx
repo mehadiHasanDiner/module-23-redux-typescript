@@ -22,8 +22,8 @@ const TodoForm = () => {
         <div>
             <h1>Add todo</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="Todo">Task</label>
-                <input className="border border-red-500" type="text" name="todo" id="todo" onBlur={(e) => setTask(e.target.value)} />
+                <label htmlFor="Todo">Task:</label>
+                <input className="border border-red-500 p-2 rounded-md m-2" type="text" name="todo" id="todo" onBlur={(e) => setTask(e.target.value)} />
                 <button className="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>

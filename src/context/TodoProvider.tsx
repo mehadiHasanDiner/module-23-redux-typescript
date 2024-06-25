@@ -1,45 +1,52 @@
-import { ReactNode, createContext, useReducer } from "react";
+import { ReactNode, createContext, useReducer } from 'react';
 
-export const TodoContext = createContext<{ state: TTodo[]; dispatch: React.Dispatch<TAction> } | undefined>(undefined);
+export const TodoContext = createContext<
+  { state: TTodo[]; dispatch: React.Dispatch<TAction> } | undefined
+>(undefined);
 
-type TTodo = {
-    id: string;
-    title: string;
-    isCompleted: boolean;
-}
-const initialState: TTodo[] = []
+export type TTodo = {
+  id: string;
+  title: string;
+  isCompleted: boolean;
+};
+const initialState: TTodo[] = [];
 
 type TAction = {
-    type: string;
-    payload: TTodo;
+  type: 'addTodo' | 'taskComplete';
+  payload: TTodo | string;
+};
 
-}
-
+const typeConstant = {
+  ADD_TODO: 'addTodo',
+  TASK_COMPLETE: 'taskComplete',
+};
 
 const reducer = (currentState: TTodo[], action: TAction) => {
-    switch (action.type) {
-        case "addTodo":
-            return [...currentState, action.payload]
-        default:
-            return currentState;
-    }
-}
+  switch (action.type) {
+    case typeConstant.ADD_TODO:
+      return [...currentState, action.payload];
+    case typeConstant.TASK_COMPLETE:
+      return currentState.map((item) =>
+        item.id === action.payload
+          ? { ...item, isCompleted: !item.isCompleted }
+          : item
+      );
+    default:
+      return currentState;
+  }
+};
 
 type TodoProvider = {
-    children: ReactNode
-}
+  children: ReactNode;
+};
 
 const TodoProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
-    const values = {
-        state,
-        dispatch
-    }
-    return (
-        <TodoContext.Provider value={values}>
-            {children}
-        </TodoContext.Provider>
-    );
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const values = {
+    state,
+    dispatch,
+  };
+  return <TodoContext.Provider value={values}>{children}</TodoContext.Provider>;
 };
 
 export default TodoProvider;

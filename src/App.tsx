@@ -5,6 +5,7 @@ import './App.css';
 // import UserInfoWithUseReducer from './components/UserInfoWithUseReducer';
 import TodoProvider from './context/TodoProvider';
 import TodoForm from './components/todo/TodoForm';
+import TodoList from './components/todo/TodoList';
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -18,6 +19,7 @@ function App() {
         {/* <UserInfoWithUseState /> */}
 
         <TodoForm />
+        <TodoList />
       </div>
     </TodoProvider>
   );
